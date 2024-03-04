@@ -7,7 +7,7 @@
 DEBIAN_VERSION=$(lsb_release -cs)
 
 # Import Tailscale GPG Key
-curl -fsSL https://pkgs.tailscale.com/stable/debian/"${DEBIAN_VERSION}".asc | apt-key add -
+curl -fsSL https://pkgs.tailscale.com/stable/debian/"${DEBIAN_VERSION}".asc -o /etc/apt/trusted.gpg.d/tailscale-"${DEBIAN_VERSION}".asc
 
 # Add Tailscale repository.
 echo "deb [arch=amd64] https://pkgs.tailscale.com/stable/debian ${DEBIAN_VERSION} main" > /etc/apt/sources.list.d/tailscale.list
