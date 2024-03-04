@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# Purpose: Add Cloudflares repository and install cloudflared during VyOS build
+#
+
+# Debian Version
+DEBIAN_VERSION=$(lsb_release -cs)
+
+# Import Tailscale GPG Key
+curl -fsSL https://pkgs.tailscale.com/stable/debian/"${DEBIAN_VERSION}".asc | apt-key add -
+
+# Add Tailscale repository.
+echo "deb [arch=amd64] https://pkgs.tailscale.com/stable/debian ${DEBIAN_VERSION} main" > /etc/apt/sources.list.d/tailscale.list
+
+# Install tailscale
+apt-get update
+apt-get -y install tailscale
